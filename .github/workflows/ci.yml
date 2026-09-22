@@ -48,7 +48,11 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements-dev.txt
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/tenants_test
       - run: pytest -q tests_tenants
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/tenants_test
 
   local-reconciler-tests:
     runs-on: windows-latest

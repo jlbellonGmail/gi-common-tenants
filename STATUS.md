@@ -1,30 +1,33 @@
 # Estado operativo
 
-GI-COMMON-TENANTS está implementado sobre el Template instalado. La rama
-contiene el dominio, la persistencia PostgreSQL, las superficies Python/HTTP,
-la integración Python con Core v0.3.0 y las pruebas del módulo.
+GI-COMMON-TENANTS está validado en una rama de trabajo sobre el Template
+instalado. La rama contiene el dominio, persistencia PostgreSQL, superficies
+Python/HTTP, integración Python con Core v0.3.0, HTTP de identidad y pruebas
+reales de PostgreSQL/RLS.
 
-La migración y las políticas RLS fueron verificadas en PostgreSQL 16 temporal.
-La integración HTTP remota de Core queda pendiente porque no existe un
-endpoint autorizado configurado en este entorno.
+La migración se ejecutó desde una base vacía y repetidamente en PostgreSQL 16.
+La integración HTTP remota de Core queda limitada a identidad: Core v0.3.0 no
+publica por HTTP creación, listado ni autorización. Esas capacidades quedan
+verificadas mediante la biblioteca Python y fallan cerrado por HTTP.
 
 ## Próximo paso
 
-Revisar la PR y ejecutar HITL. No hacer merge ni release automáticamente.
+Revisar la PR de validación y ejecutar HITL. La candidata v0.1.0 está
+preparada, pero no se debe crear tag ni publicar release automáticamente.
 
 <!-- STATUS:AUTO:BEGIN -->
 
 ## Estado verificado automáticamente
 
-- Actualizado: 2026-09-22T13:48:48Z
+- Actualizado: 2026-09-22T16:49:37Z
 - Versión: unreleased
-- Rama: feature/01-tenants-implementation
-- HEAD: 516c2d7433ab5587a34223beef15f16d7bb1b4ff
+- Rama: feature/02-validation-v010
+- HEAD: 7ae448ce75338067c5a9f662d53cd10f8ff9bd97
 - Remoto: https://github.com/jlbellonGmail/gi-common-tenants.git
 - Working tree: dirty
 - Worktrees: 3
 - Worktrees Git: 3
-- Unidades activas: = [feature/01-tenants-implementation]
+- Unidades activas: = [feature/02-validation-v010]
 - PR activa: UNKNOWN / sin PR abierta
 - CI: UNKNOWN / sin CI verificable
 - CI vigente: UNKNOWN / sin CI verificable

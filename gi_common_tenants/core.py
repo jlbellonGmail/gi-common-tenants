@@ -47,7 +47,11 @@ class CoreApiAdapter:
 
 
 class HttpCoreAdapter:
-    """Small HTTP client for Core's published v0.2 HTTP contract."""
+    """Small HTTP client for Core's published v0.3 tenant HTTP surface.
+
+    Core v0.3.0 publishes tenant identity operations over HTTP while tenant
+    creation, listing and authorization remain Python-only contracts.
+    """
 
     def __init__(self, base_url: str, bearer_token: str, *, timeout: float = 5.0):
         self.base_url = base_url.rstrip("/")
@@ -73,17 +77,17 @@ class HttpCoreAdapter:
             raise CoreUnavailableError() from exc
 
     def validate_identity(self, tenant_id: str, user_id: str, external_subject: str) -> dict:
-        return self._request("POST", f"/v1/organizations/{tenant_id}/identity-validation", {
+        return self._request("POST", f"/v1/tenants/{tenant_id}/identity-validation", {
             "user_id": user_id, "external_subject": external_subject,
         })
 
     def link_identity(self, tenant_id: str, person_id: str, user_id: str, external_subject: str) -> dict:
-        return self._request("POST", f"/v1/organizations/{tenant_id}/identity-links", {
+        return self._request("POST", f"/v1/tenants/{tenant_id}/identity-links", {
             "person_id": person_id, "user_id": user_id, "external_subject": external_subject,
         })
 
     def unlink_identity(self, tenant_id: str, person_id: str) -> dict:
-        return self._request("DELETE", f"/v1/organizations/{tenant_id}/identity-links/{person_id}")
+        return self._request("DELETE", f"/v1/tenants/{tenant_id}/identity-links/{person_id}")
 
     def authorize(self, user_id: str, tenant_id: str, permission: str, location_id: str | None = None) -> dict:
         raise CapabilityUnavailableError("Core v0.3.0 does not publish authorization over its checked-in HTTP contract")
