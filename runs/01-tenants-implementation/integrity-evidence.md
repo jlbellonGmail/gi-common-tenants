@@ -1,6 +1,6 @@
 # Evidencia de integridad — 01-tenants-implementation
 
-HEAD verificado: `49c553975082dabc6cfe221d31f755705e5ae784`
+HEAD verificado: `ac895eb6f984be4d49a9eccbe6ed7bafd560b90b`
 Base verificada: `develop`
 
 ## Resultado

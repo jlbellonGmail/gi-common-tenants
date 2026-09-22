@@ -1,9 +1,9 @@
 status: approved
 scope: 01-tenants-implementation
-head: 49c553975082dabc6cfe221d31f755705e5ae784
+head: ac895eb6f984be4d49a9eccbe6ed7bafd560b90b
 base: develop
 reviewer: independent-review
-reviewedAt: 2026-09-22T16:07:22Z
+reviewedAt: 2026-09-22T16:08:22Z
 
 # Revisión independiente — GI-COMMON-TENANTS
 
