@@ -15,5 +15,5 @@ Creación/listado/autorización no tienen contrato HTTP publicado y permanecen
 fail-closed.
 
 PR: #2
-HEAD: e283e61f336b0498f2976a1aa74ad0f8b814681f
+HEAD: db2313db0c6b30cda63d9616011dc4fc7a6d801f
 Estado: READY_FOR_HITL

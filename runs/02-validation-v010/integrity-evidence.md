@@ -1,6 +1,6 @@
 status: approved
 scope: 02-validation-v010
-head: e283e61f336b0498f2976a1aa74ad0f8b814681f
+head: db2313db0c6b30cda63d9616011dc4fc7a6d801f
 base: develop
 
 `check-integrity.ps1`: PASS.
