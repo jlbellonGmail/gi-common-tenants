@@ -16,10 +16,10 @@ Revisar la PR y ejecutar HITL. No hacer merge ni release automáticamente.
 
 ## Estado verificado automáticamente
 
-- Actualizado: 2026-09-22T13:44:01Z
+- Actualizado: 2026-09-22T13:48:48Z
 - Versión: unreleased
 - Rama: feature/01-tenants-implementation
-- HEAD: a21d3415d1444b1584e6736eac9927146625ca00
+- HEAD: 516c2d7433ab5587a34223beef15f16d7bb1b4ff
 - Remoto: https://github.com/jlbellonGmail/gi-common-tenants.git
 - Working tree: dirty
 - Worktrees: 3
