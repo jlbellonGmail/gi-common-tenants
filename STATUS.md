@@ -1,25 +1,25 @@
 # Estado operativo
 
-GI-COMMON-TENANTS está en implementación inicial sobre el Template instalado.
-La rama de trabajo contiene el dominio, la persistencia PostgreSQL, las
-superficies Python/HTTP, la integración Python con Core v0.3.0 y pruebas
-unitarias/integración local. La validación contra PostgreSQL real y la API HTTP
-remota de Core quedan condicionadas a que el entorno proporcione esos servicios.
+GI-COMMON-TENANTS está implementado sobre el Template instalado. La rama
+contiene el dominio, la persistencia PostgreSQL, las superficies Python/HTTP,
+la integración Python con Core v0.3.0 y las pruebas del módulo.
+
+La migración y las políticas RLS fueron verificadas en PostgreSQL 16 temporal.
+La integración HTTP remota de Core queda pendiente porque no existe un
+endpoint autorizado configurado en este entorno.
 
 ## Próximo paso
 
-Ejecutar la migración en una base de desarrollo autorizada, probar RLS y
-verificar la integración HTTP cuando Core publique las capacidades faltantes.
-Luego preparar PR y revisión HITL; no hacer merge ni release automáticamente.
+Revisar la PR y ejecutar HITL. No hacer merge ni release automáticamente.
 
 <!-- STATUS:AUTO:BEGIN -->
 
 ## Estado verificado automáticamente
 
-- Actualizado: 2026-09-22T13:21:10Z
+- Actualizado: 2026-09-22T13:44:01Z
 - Versión: unreleased
 - Rama: feature/01-tenants-implementation
-- HEAD: ce59b2c35b0b3ef89df21861b7bc27591d85a4ed
+- HEAD: a21d3415d1444b1584e6736eac9927146625ca00
 - Remoto: https://github.com/jlbellonGmail/gi-common-tenants.git
 - Working tree: dirty
 - Worktrees: 3
