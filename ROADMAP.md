@@ -17,6 +17,8 @@ Agregá aquí cada feature o milestone con una identidad única, por ejemplo:
 
 No registres aquí fases históricas del template ni evidencias de ejecución.
 
+- [ ] 01-tenants-implementation — Implementar administración administrativa, comercial, contractual y de suscripciones con Core v0.3.0.
+
 ## Fuentes de orientación
 
 - [CONSTITUTION](CONSTITUTION.md) — principios permanentes.
