@@ -1,6 +1,6 @@
 # Evidencia de integridad — 01-tenants-implementation
 
-HEAD verificado: `ac895eb6f984be4d49a9eccbe6ed7bafd560b90b`
+HEAD verificado: `HEAD` (el commit que contiene esta evidencia)
 Base verificada: `develop`
 
 ## Resultado

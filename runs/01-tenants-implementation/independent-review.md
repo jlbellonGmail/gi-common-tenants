@@ -1,6 +1,6 @@
 status: approved
 scope: 01-tenants-implementation
-head: ac895eb6f984be4d49a9eccbe6ed7bafd560b90b
+head: HEAD
 base: develop
 reviewer: independent-review
 reviewedAt: 2026-09-22T16:08:22Z
