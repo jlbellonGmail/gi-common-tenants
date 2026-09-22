@@ -76,10 +76,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          run_root='runs'
-          if [[ -n '${{ steps.feature.outputs.version }}' ]]; then
-            run_root="runs/${{ steps.feature.outputs.version }}"
-          fi
+          $runRoot = 'runs'
+          if (-not [string]::IsNullOrWhiteSpace('${{ steps.feature.outputs.version }}')) {
+            $runRoot = "runs/${{ steps.feature.outputs.version }}"
+          }
           ./scripts/complete-approved-pr.ps1 `
             -Slug '${{ steps.feature.outputs.slug }}' `
             -Branch '${{ steps.feature.outputs.branch }}' `
@@ -90,6 +90,6 @@ jobs:
             -CommentOnFailure `
             -GovernanceMode SingleMaintainer `
             -PreAuthorizedHumanMerge `
-            -AuthorizationPath "$run_root/${{ steps.feature.outputs.slug }}/human-authorization.md" `
-            -IndependentReviewPath "$run_root/${{ steps.feature.outputs.slug }}/independent-review.md" `
-            -IntegrityEvidencePath "$run_root/${{ steps.feature.outputs.slug }}/integrity-evidence.md"
+            -AuthorizationPath "$runRoot/${{ steps.feature.outputs.slug }}/human-authorization.md" `
+            -IndependentReviewPath "$runRoot/${{ steps.feature.outputs.slug }}/independent-review.md" `
+            -IntegrityEvidencePath "$runRoot/${{ steps.feature.outputs.slug }}/integrity-evidence.md"
