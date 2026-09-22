@@ -1,7 +1,12 @@
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(r"C:\Proyectos\gi-platform-core")))
+import pytest
+
+CORE_PATH = Path(r"C:\Proyectos\gi-platform-core")
+if not CORE_PATH.exists():
+    pytest.skip("GI-PLATFORM-CORE checkout not available in this runner", allow_module_level=True)
+sys.path.insert(0, str(CORE_PATH))
 
 from gi_platform_core import CoreApi, CoreService, InMemoryCoreStore
 from gi_common_tenants.core import CoreApiAdapter
