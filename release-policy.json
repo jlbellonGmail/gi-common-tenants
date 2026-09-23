@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "roadmap": {
+    "requireAllUnitsClosed": true
+  },
+  "releaseAudit": {
+    "directory": "runs/{version}/release-audit",
+    "files": [
+      "SUMMARY.md",
+      "audit-1.md",
+      "test-report-1.md",
+      "code-review-1.md"
+    ]
+  },
+  "immutableTags": []
+}

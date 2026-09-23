@@ -40,5 +40,6 @@ calificación subjetiva.
 - [Unidades y paralelización](unidades-paralelizacion.md)
 - [Validacion integral v2](validacion-integral-v2.md)
 - [[v2.0.0][F17] Auditoría final y release v2.0.0](auditoria-release-v2.md)
+- [Adaptación del contrato de release](release-contract-adaptation.md)
 
 <!-- FEATURE_LINKS_END -->
