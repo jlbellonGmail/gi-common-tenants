@@ -8,6 +8,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+. (Join-Path $PSScriptRoot "release-policy.ps1")
 
 function Invoke-Git([string[]] $Arguments) {
     $value = & git @Arguments 2>&1
@@ -31,13 +32,9 @@ try {
         Assert-Condition ($Version -match '^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$') "Version invalida: '$Version'. Se exige SemVer vMAJOR.MINOR.PATCH."
         $roadmapPath = Join-Path $root "ROADMAP.md"
         Assert-Condition (Test-Path -LiteralPath $roadmapPath -PathType Leaf) "ROADMAP.md inexistente."
+        $policy = Get-ReleasePolicy -RepositoryRoot $root
         $roadmap = Get-Content -LiteralPath $roadmapPath -Raw -Encoding UTF8
-        $required = @("18-status-observabilidad", "19-unidades-paralelizacion", "20-releases-evolucion", "21-validacion-integral-v2", "22-auditoria-release-v2")
-        foreach ($item in $required) {
-            $match = [regex]::Match($roadmap, "(?m)^- \[(?<state>[ x-])\] $([regex]::Escape($item))\b")
-            Assert-Condition $match.Success "ROADMAP incompleto: falta '$item'."
-            Assert-Condition ($match.Groups["state"].Value -eq "x") "ROADMAP incompleto: '$item' no esta cerrado."
-        }
+        Assert-ReleaseRoadmapComplete -Units (Get-ReleaseRoadmapUnits -Content $roadmap)
 
     Assert-Condition ($CandidateBranch -notin @("", "main")) "La candidata debe provenir de una rama de integracion distinta de main."
     $current = Invoke-Git @("branch", "--show-current")
@@ -48,9 +45,9 @@ try {
         $developSha = Invoke-Git @("rev-parse", "develop^{commit}")
         Assert-Condition ($candidateSha -eq $developSha) "La candidata no coincide con el HEAD local de develop."
 
-        $run = Join-Path $root "runs\$Version\22-auditoria-release-v2"
-        Assert-Condition (Test-Path -LiteralPath $run -PathType Container) "Falta la auditoria de release para $Version (F17)."
-        foreach ($file in @("SUMMARY.md", "audit-1.md", "test-report-1.md", "code-review-1.md")) {
+        $run = Resolve-ReleaseAuditPath -RepositoryRoot $root -Version $Version -Policy $policy
+        Assert-Condition (Test-Path -LiteralPath $run -PathType Container) "Falta la auditoria de release para ${Version}: $run."
+        foreach ($file in @($policy.releaseAudit.files)) {
             Assert-Condition (Test-Path -LiteralPath (Join-Path $run $file) -PathType Leaf) "Falta evidencia de release: $run\$file."
         }
         $audit = Get-Content (Join-Path $run "audit-1.md") -Raw
@@ -87,10 +84,7 @@ try {
 
         $tag = Invoke-Optional "git" @("rev-parse", "$Version^{commit}")
         Assert-Condition ($tag.Code -ne 0) "Tag $Version ya existe; se rechaza cualquier overwrite."
-        $oldTag = Invoke-Optional "git" @("rev-parse", "v1.1.0^{commit}")
-        Assert-Condition ($oldTag.Code -eq 0 -and $oldTag.Text -eq "d13ffcf34b6d982a7b3b89a364c17762f5efad70") "v1.1.0 no coincide con su commit historico inmutable."
-        $oldTagType = Invoke-Git @("cat-file", "-t", "v1.1.0")
-        Assert-Condition ($oldTagType -eq "tag") "v1.1.0 debe conservar un objeto tag anotado."
+        Assert-ImmutableReleaseTags -Policy $policy
 
         $mode = if ($DryRun) { "DRY-RUN" } else { "READINESS-ONLY" }
         Write-Output "PASS ${mode}: $Version candidata en $candidateSha; sin publicaciones ni cambios remotos."
