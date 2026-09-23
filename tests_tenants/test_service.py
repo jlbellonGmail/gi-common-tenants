@@ -10,6 +10,8 @@ class Core:
 
     def authorize(self, user_id, tenant_id, permission, location_id=None):
         return {"contract_version": "0.3.0", "allowed": True, "context": {"user_id": user_id, "tenant_id": tenant_id}}
+    def list_tenants(self, user_id):
+        return [{"tenant_id": "00000000-0000-0000-0000-000000000001"}, {"tenant_id": "00000000-0000-0000-0000-000000000002"}]
 
     def create_tenant(self, name):
         self.created += 1

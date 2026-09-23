@@ -37,3 +37,12 @@ permiso en Core. Las capacidades no publicadas por Core se rechazan con
 El estado técnico de Core, el estado del contrato, el estado de la
 suscripción y el estado del plan son independientes. Cancelar o vencer una
 suscripción no elimina el tenant ni cambia tablas de Core.
+
+## Validación v0.1.0
+
+La migración crea diez tablas funcionales, `audit_events` y
+`tenant_subscription_history`. PostgreSQL aplica RLS y claves compuestas que
+impiden combinar una suscripción con el contrato de otro tenant o con el
+precio de otro plan. Los cambios comerciales conservan `price_snapshot` y
+su historial. La integración HTTP usa `/v1/tenants`; las rutas
+`organizations` son legacy de Core.

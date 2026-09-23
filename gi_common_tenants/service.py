@@ -58,11 +58,26 @@ class TenantService:
             "action": action, "resource": resource, "resource_id": resource_id, "outcome": outcome, "occurred_at": utcnow(),
         })
 
-    def _tenant_exists(self, tenant_id: str) -> None:
+    def _tenant_exists(self, tenant_id: str, user_id: str) -> None:
         # The service deliberately delegates identity existence to Core. A
         # profile may be created only after Core accepts the tenant context.
         if not tenant_id:
             raise ValidationError("tenant_id is required")
+        list_tenants = getattr(self.core, "list_tenants", None)
+        if not callable(list_tenants):
+            raise CapabilityUnavailableError("Core tenant listing is required to validate tenant identity")
+        tenants = list_tenants(user_id)
+        if not any(str(item.get("tenant_id") or item.get("id")) == str(tenant_id) for item in tenants if isinstance(item, dict)):
+            raise NotFoundError("tenant not found in Core authorization context")
+
+    def _subscription_history(self, before, after, event_type):
+        if not hasattr(self.repository, "record_subscription_history"):
+            return
+        self.repository.record_subscription_history({
+            "history_id": self.repository.new_id(), "subscription_id": after["subscription_id"],
+            "tenant_id": after["tenant_id"], "event_type": event_type,
+            "previous_state": before, "new_state": after, "occurred_at": utcnow(),
+        })
 
     def _global_scope(self, ctx: TenantContext, permission: str) -> None:
         self.auth.require(ctx, permission)
@@ -80,11 +95,15 @@ class TenantService:
             raise ValidationError("Core did not return tenant_id")
         if ctx.tenant_id != tenant_id:
             raise IsolationError()
-        return self.create_profile(ctx, tenant_id=tenant_id, display_name=display_name, legal_name=legal_name, entity_type=entity_type, country_code=country_code, locale=locale, timezone=timezone_name)
+        return self._create_profile(ctx, tenant_id=tenant_id, display_name=display_name, legal_name=legal_name, entity_type=entity_type, country_code=country_code, locale=locale, timezone=timezone_name, validate_core=False)
 
     def create_profile(self, ctx: TenantContext, *, tenant_id: str, display_name: str, legal_name: str, entity_type: str, country_code: str, locale="es-AR", timezone="UTC"):
+        return self._create_profile(ctx, tenant_id=tenant_id, display_name=display_name, legal_name=legal_name, entity_type=entity_type, country_code=country_code, locale=locale, timezone=timezone, validate_core=True)
+
+    def _create_profile(self, ctx: TenantContext, *, tenant_id: str, display_name: str, legal_name: str, entity_type: str, country_code: str, locale="es-AR", timezone="UTC", validate_core=True):
         self._scope(ctx, tenant_id, "tenants:profile:write")
-        self._tenant_exists(tenant_id)
+        if validate_core:
+            self._tenant_exists(tenant_id, ctx.user_id)
         row = {"tenant_id": str(tenant_id), "display_name": required(display_name, "display_name"), "legal_name": required(legal_name, "legal_name"), "entity_type": enum(entity_type, "entity_type", {"individual", "legal_entity"}), "country_code": required(country_code, "country_code").upper(), "locale": required(locale, "locale"), "timezone": required(timezone, "timezone"), "version": 1, "created_at": utcnow(), "updated_at": utcnow()}
         with self.repository.transaction():
             if self.repository.get("tenant_profiles", tenant_id): raise ConflictError()
@@ -186,14 +205,17 @@ class TenantService:
             active = self.repository.list("tenant_subscriptions", tenant_id=tenant_id, filters={"status": "active"})
             if any(s["plan_id"] == plan_id for s in active): raise ConflictError()
             self.repository.put("tenant_subscriptions", row["subscription_id"], row); self._audit(ctx, tenant_id, "subscription.created", "tenant_subscription", row["subscription_id"])
+            self._subscription_history(None, row, "created")
         return row
     def list_subscriptions(self, ctx, tenant_id): self._scope(ctx, tenant_id, "tenants:subscription:read"); return self.repository.list("tenant_subscriptions", tenant_id=tenant_id)
     def update_subscription(self, ctx, subscription_id, expected_version, **changes):
         row = self._tenant_child(ctx, "tenant_subscriptions", "subscription_id", subscription_id, "tenants:subscription:write"); allowed = {"status", "cancel_at", "canceled_at", "current_period_start", "current_period_end"}; unknown = set(changes)-allowed
         if unknown: raise ValidationError(f"unknown subscription fields: {sorted(unknown)}")
         if "status" in changes: changes["status"] = enum(changes["status"], "status", {"pending", "active", "canceled", "expired", "past_due"})
+        before = dict(row)
         row.update(changes); row["updated_at"] = utcnow()
-        with self.repository.transaction(): result=self.repository.put("tenant_subscriptions", subscription_id, row, expected_version=expected_version); self._audit(ctx, row["tenant_id"], "subscription.updated", "tenant_subscription", subscription_id); return result
+        with self.repository.transaction():
+            result=self.repository.put("tenant_subscriptions", subscription_id, row, expected_version=expected_version); self._audit(ctx, row["tenant_id"], "subscription.updated", "tenant_subscription", subscription_id); self._subscription_history(before, result, "updated"); return result
 
     def renew_subscription(self, ctx, subscription_id, *, current_period_start, current_period_end):
         row = self._tenant_child(ctx, "tenant_subscriptions", "subscription_id", subscription_id, "tenants:subscription:write")
@@ -211,8 +233,10 @@ class TenantService:
         price = self.repository.require("service_plan_prices", price_id)
         if price["plan_id"] == row["plan_id"] or current_period_end <= current_period_start:
             raise ValidationError("a plan change requires a different plan and valid period")
+        before = dict(row)
         row.update({"plan_id": price["plan_id"], "price_id": price_id, "current_period_start": current_period_start, "current_period_end": current_period_end, "price_snapshot": {"amount": price["amount"], "currency_code": price["currency_code"], "billing_interval": price["billing_interval"], "billing_interval_count": price["billing_interval_count"]}, "updated_at": utcnow()})
-        with self.repository.transaction(): result=self.repository.put("tenant_subscriptions", subscription_id, row, expected_version=row["version"]); self._audit(ctx, row["tenant_id"], "subscription.plan_changed", "tenant_subscription", subscription_id); return result
+        with self.repository.transaction():
+            result=self.repository.put("tenant_subscriptions", subscription_id, row, expected_version=row["version"]); self._audit(ctx, row["tenant_id"], "subscription.plan_changed", "tenant_subscription", subscription_id); self._subscription_history(before, result, "plan_changed"); return result
 
     def update_contract(self, ctx, contract_id, **changes):
         row = self._tenant_child(ctx, "tenant_contracts", "contract_id", contract_id, "tenants:contract:write")

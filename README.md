@@ -26,6 +26,10 @@ python -m pip install -e ".[dev]"
 Copy-Item .env.example .env
 ```
 
+La identidad HTTP de Core v0.3.0 usa `/v1/tenants/{tenant_id}`; las rutas
+`organizations` son legacy. El adaptador falla cerrado para creación, listado
+y autorización porque esas operaciones sólo están publicadas por Python.
+
 Aplicar la migración `supabase/migrations/20260922000000_tenants_initial.sql`
 en PostgreSQL/Supabase. El servicio usa `psycopg` y el repositorio
 `PostgresTenantRepository`; no depende de cambios manuales en la base.

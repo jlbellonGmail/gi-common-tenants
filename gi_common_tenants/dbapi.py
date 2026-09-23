@@ -18,8 +18,9 @@ TABLES = {
     "tenant_contracts": ("contract_id", ("contract_id", "tenant_id", "contract_number", "status", "signed_at", "effective_from", "effective_until", "document_reference", "created_at")),
     "tenant_subscriptions": ("subscription_id", ("subscription_id", "tenant_id", "contract_id", "plan_id", "price_id", "status", "started_at", "current_period_start", "current_period_end", "cancel_at", "canceled_at", "created_at", "updated_at", "version", "price_snapshot")),
     "tenant_billing_settings": ("tenant_id", ("tenant_id", "billing_currency", "tax_condition", "billing_email", "billing_day", "payment_terms_days", "created_at", "updated_at", "version")),
+    "tenant_subscription_history": ("history_id", ("history_id", "subscription_id", "tenant_id", "event_type", "previous_state", "new_state", "occurred_at")),
 }
-JSON_FIELDS = {"entitlement_value", "price_snapshot"}
+JSON_FIELDS = {"entitlement_value", "price_snapshot", "previous_state", "new_state"}
 
 
 class PostgresTenantRepository:
@@ -98,7 +99,17 @@ class PostgresTenantRepository:
         if rows: raise ConflictError()
     def record_audit(self, event):
         with self._connection() as conn:
-            with conn.cursor() as cur: cur.execute(f"insert into {self.schema}.audit_events (event_id,tenant_id,actor_user_id,action,resource,resource_id,outcome,occurred_at) values (%s,%s,%s,%s,%s,%s,%s,%s)", tuple(event.get(k) for k in ("event_id","tenant_id","actor_user_id","action","resource","resource_id","outcome","occurred_at")))
+                with conn.cursor() as cur: cur.execute(f"insert into {self.schema}.audit_events (event_id,tenant_id,actor_user_id,action,resource,resource_id,outcome,occurred_at) values (%s,%s,%s,%s,%s,%s,%s,%s)", tuple(event.get(k) for k in ("event_id","tenant_id","actor_user_id","action","resource","resource_id","outcome","occurred_at")))
+    def record_subscription_history(self, event):
+        with self._connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    f"insert into {self.schema}.tenant_subscription_history "
+                    "(history_id,subscription_id,tenant_id,event_type,previous_state,new_state,occurred_at) "
+                    "values (%s,%s,%s,%s,%s,%s,%s)",
+                    tuple(json.dumps(event[k]) if k in {"previous_state", "new_state"} else event.get(k)
+                          for k in ("history_id", "subscription_id", "tenant_id", "event_type", "previous_state", "new_state", "occurred_at")),
+                )
     @staticmethod
     def _row(columns, row):
         result=dict(zip(columns,row))
