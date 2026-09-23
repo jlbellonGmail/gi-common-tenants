@@ -1,13 +1,11 @@
 status: approved
 attempt: 1
 feedback:
-  - PostgreSQL 16 real: migración, RLS y FKs compuestas aprobadas.
-  - Core local v0.3.0 Python y HTTP de identidad aprobados.
-  - CI remoto PASS en circuit-tests, product-tests y local-reconciler-tests.
----
+  - PostgreSQL 16 real: migración reproducible, RLS y FKs compuestas PASS.
+  - Integración Python y HTTP con Core v0.3.0 PASS.
+  - CI PASS: circuit-tests, product-tests y local-reconciler-tests.
 
-# Informe QA 1
+# Test report 1
 
-- `tests_tenants` con Core local y PostgreSQL real: **10 passed**.
-- CI de PR #2, run `35756713013`: **3 jobs PASS**.
-- Migración ejecutada dos veces desde PostgreSQL 16 sin error.
+HEAD: b911635666a892e00160c626b987b6af2486c122
+PR: #2

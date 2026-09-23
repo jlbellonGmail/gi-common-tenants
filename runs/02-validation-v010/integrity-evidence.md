@@ -1,9 +1,9 @@
-status: approved
-scope: 02-validation-v010
-head: db2313db0c6b30cda63d9616011dc4fc7a6d801f
-base: develop
+# Integrity evidence 02-validation-v010
 
-`check-integrity.ps1`: PASS.
-`sync-agentic-adapters.ps1 -Check`: PASS.
-`validate-supply-chain.ps1`: PASS.
-`git diff --check`: PASS.
+HEAD: b911635666a892e00160c626b987b6af2486c122
+status: PASS
+check-integrity.ps1: PASS
+sync-agentic-adapters.ps1 -Check: PASS
+validate-supply-chain.ps1: PASS
+git diff --check: PASS
+PostgreSQL 16, migraciones y RLS: PASS

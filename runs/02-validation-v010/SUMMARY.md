@@ -15,5 +15,16 @@ Creación/listado/autorización no tienen contrato HTTP publicado y permanecen
 fail-closed.
 
 PR: #2
-HEAD: db2313db0c6b30cda63d9616011dc4fc7a6d801f
+HEAD: b911635666a892e00160c626b987b6af2486c122
+Base: develop
 Estado: READY_FOR_HITL
+
+## Evidencia
+
+`check-integrity.ps1`: PASS.
+`sync-agentic-adapters.ps1 -Check`: PASS.
+`validate-supply-chain.ps1`: PASS.
+`git diff --check`: PASS.
+PostgreSQL 16, migraciones y RLS: PASS.
+Integración Python y HTTP con Core v0.3.0: PASS.
+CI: PASS en `circuit-tests`, `product-tests` y `local-reconciler-tests`.
