@@ -28,8 +28,10 @@ fuente canónica, regenerar adaptadores y declarar modelos por ejecución.
 - [MCP y herramientas externas](mcp-herramientas.md)
 - [Routing dinámico por capacidades y evidencia](routing-dinamico.md)
 - [Releases y evolución](releases-evolucion.md)
+- [API de Common-Tenants](tenants-api.md)
 - [Unidades y paralelización](unidades-paralelizacion.md)
 - [Validacion integral v2](validacion-integral-v2.md)
 - [[v2.0.0][F17] Auditoría final y release v2.0.0](auditoria-release-v2.md)
+- [Adaptación del contrato de release](release-contract-adaptation.md)
 
 <!-- FEATURE_LINKS_END -->

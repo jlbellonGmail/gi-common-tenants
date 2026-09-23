@@ -35,9 +35,11 @@ calificación subjetiva.
 - [Supply chain y CI/CD profesional](supply-chain-cicd.md)
 - [MCP y herramientas externas](mcp-herramientas.md)
 - [Routing dinámico por capacidades y evidencia](routing-dinamico.md)
+- [Arquitectura de Common-Tenants](tenants-module.md)
 - [Releases y evolución](releases-evolucion.md)
 - [Unidades y paralelización](unidades-paralelizacion.md)
 - [Validacion integral v2](validacion-integral-v2.md)
 - [[v2.0.0][F17] Auditoría final y release v2.0.0](auditoria-release-v2.md)
+- [Adaptación del contrato de release](release-contract-adaptation.md)
 
 <!-- FEATURE_LINKS_END -->

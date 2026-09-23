@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gi-common-tenants"
+version = "0.1.0"
+description = "GI administrative, legal, commercial and subscription module"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115,<1",
+    "pydantic>=2.7,<3",
+    "psycopg[binary]>=3.2,<4",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "httpx>=0.27"]
+
+[tool.setuptools.packages.find]
+include = ["gi_common_tenants*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests_tenants", "tests"]
+addopts = "-q"
