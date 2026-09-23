@@ -19,10 +19,10 @@ preparada, pero no se debe crear tag ni publicar release automáticamente.
 
 ## Estado verificado automáticamente
 
-- Actualizado: 2026-09-23T17:31:16Z
+- Actualizado: 2026-09-23T17:36:58Z
 - Versión: unreleased
 - Rama: feature/02-validation-v010
-- HEAD: 37e2a660516c35e93a3ca429eedc3c7ee2993ba0
+- HEAD: 08e9a38174d7ec85f3ef10af3f2cee6769b9aeb9
 - Remoto: https://github.com/jlbellonGmail/gi-common-tenants.git
 - Working tree: dirty
 - Worktrees: 3
