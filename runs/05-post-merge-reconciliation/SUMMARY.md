@@ -37,3 +37,9 @@ adaptadores agentic, supply chain y diff limpio.
 
 `spec.md`, `plan.md`, `tasks.md`, `decision.md`, `audit-1.md`,
 `test-report-1.md`, `code-review-1.md` e `integrity-evidence.md`.
+
+## Resultado
+
+La implementación local y las regresiones determinísticas pasan. La validación
+remota de CI y el único gate HITL se ejecutarán sobre el HEAD publicado de la
+PR.
