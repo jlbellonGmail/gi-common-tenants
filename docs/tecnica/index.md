@@ -3,6 +3,7 @@
 Documentación técnica del circuito y del producto.
 
 <!-- FEATURE_LINKS_START -->
+- [Package Version V011](package-version-v011.md)
 - [Corregir reconciliación post-merge](post-merge-reconciliation.md)
 - [Corregir guard-develop y verificar gobernanza](governance-guard-fix.md)
 - [Conservar evidencias HITL compatibles](governance-evidence-preservation.md)
