@@ -5,6 +5,7 @@ Documentación técnica del circuito y del producto.
 <!-- FEATURE_LINKS_START -->
 - [Corregir reconciliación post-merge](post-merge-reconciliation.md)
 - [Corregir guard-develop y verificar gobernanza](governance-guard-fix.md)
+- [Conservar evidencias HITL](governance-evidence-preservation.md)
 - [Adaptación del contrato de release](release-contract-adaptation.md)
 - [Módulo Common-Tenants](tenants-module.md)
 - [Acceso PostgreSQL Common-Tenants](tenants-db-access.md)
