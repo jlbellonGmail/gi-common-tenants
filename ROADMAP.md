@@ -21,13 +21,14 @@ No registres aquí fases históricas del template ni evidencias de ejecución.
 - [x] 02-validation-v010 — Validar PostgreSQL/Core, corregir hallazgos y preparar v0.1.0 para HITL sin publicar.
 - [x] 03-release-contract-adaptation — Adaptar el preflight de release para validar las unidades reales del producto derivado.
 - [ ] 04-tenants-permissions — Aplicar privilegios mínimos y validar acceso RLS en Supabase gi-dev.
-- [ ] 05-post-merge-reconciliation — Corregir y reconciliar el cierre post-merge del Template sin depender de eventos suprimidos por GITHUB_TOKEN.
+- [-] 05-post-merge-reconciliation — Corregir y reconciliar el cierre post-merge del Template sin depender de eventos suprimidos por GITHUB_TOKEN.
 
 ## Fuentes de orientación
 
 - [CONSTITUTION](CONSTITUTION.md) — principios permanentes.
 - [AGENTS](AGENTS.md) — operación del circuito.
 - [STATUS](STATUS.md) — estado actual para reentrada.
+
 
 
 
