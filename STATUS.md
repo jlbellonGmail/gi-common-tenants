@@ -1,36 +1,32 @@
 # Estado operativo
 
-GI-COMMON-TENANTS está validado en una rama de trabajo sobre el Template
-instalado. La rama contiene el dominio, persistencia PostgreSQL, superficies
-Python/HTTP, integración Python con Core v0.3.0, HTTP de identidad y pruebas
-reales de PostgreSQL/RLS.
-
-La migración se ejecutó desde una base vacía y repetidamente en PostgreSQL 16.
-La integración HTTP remota de Core queda limitada a identidad: Core v0.3.0 no
-publica por HTTP creación, listado ni autorización. Esas capacidades quedan
-verificadas mediante la biblioteca Python y fallan cerrado por HTTP.
+La unidad `09-package-version-consistency-v011` corrige la discrepancia entre
+el metadato de distribución `0.1.1` y `gi_common_tenants.__version__`. La PR
+#11 está abierta contra `develop`; CI está verde. La release/tag `v0.1.1`
+existente es histórica y contiene el wheel inconsistente, por lo que no se
+sobrescribe. El wheel corregido queda en la evidencia de la unidad. No se
+realiza merge ni una nueva publicación sin decisión humana de release.
 
 ## Próximo paso
 
-Revisar la PR de validación y ejecutar HITL. La candidata v0.1.0 está
-preparada, pero no se debe crear tag ni publicar release automáticamente.
+Revisión humana de la PR #11 y decisión de release/publicación.
 
 <!-- STATUS:AUTO:BEGIN -->
 
 ## Estado verificado automáticamente
 
-- Actualizado: 2026-09-24T16:03:13Z
+- Actualizado: 2026-09-24T21:48:14Z
 - Versión: unreleased
-- Rama: develop
-- HEAD: b2e3dca77c9b24700caaaeeecd706f840ef5fb0f
-- Remoto: https://github.com/jlbellonGmail/gi-common-tenants
+- Rama: feature/09-package-version-consistency-v011
+- HEAD: 7505eb72f94e852ec7d4d888090a8cf43bd3895a
+- Remoto: https://github.com/jlbellonGmail/gi-common-tenants.git
 - Working tree: dirty
 - Worktrees: 3
 - Worktrees Git: 3
-- Unidades activas: ninguna
+- Unidades activas: = [feature/03-release-contract-adaptation]; = [feature/09-package-version-consistency-v011]
 - PR activa: UNKNOWN / sin PR abierta
-- CI:  @ c29a1d89ae737dc5dd830afecd0b19001be4d96e
-- CI vigente:  @ c29a1d89ae737dc5dd830afecd0b19001be4d96e
-- Última release: v0.1.1
+- CI: UNKNOWN / sin CI verificable
+- CI vigente: UNKNOWN / sin CI verificable
+- Última release: UNKNOWN / no disponible
 
 <!-- STATUS:AUTO:END -->
