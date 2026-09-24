@@ -63,7 +63,8 @@ No registres aquí fases históricas del template ni evidencias de ejecución.
 
 
 
-- [-] 07-governance-evidence-preservation — Conservar evidencias HITL compatibles entre el gate de merge y el cierre post-merge.
+- [x] 07-governance-evidence-preservation — Conservar evidencias HITL compatibles entre el gate de merge y el cierre post-merge.
+
 
 
 
