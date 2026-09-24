@@ -61,3 +61,9 @@ PR.
 Se conserva el gate humano y la política de mínimo privilegio. La reconciliación
 no sustituye autorización ni merge: sólo verifica un merge ya confirmado y
 actualiza el estado documental de forma idempotente.
+
+## Incidencias
+
+La incidencia que originó esta unidad fue la supresión del evento de cierre
+posterior a un merge realizado con `GITHUB_TOKEN`; queda cubierta por el cierre
+explícito del gate y el dispatch de recuperación.
