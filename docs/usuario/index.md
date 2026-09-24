@@ -35,3 +35,4 @@ fuente canónica, regenerar adaptadores y declarar modelos por ejecución.
 - [Adaptación del contrato de release](release-contract-adaptation.md)
 
 <!-- FEATURE_LINKS_END -->
+- [Operación de reconciliación post-merge](post-merge-reconciliation.md)
