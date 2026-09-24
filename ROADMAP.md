@@ -20,6 +20,7 @@ No registres aquí fases históricas del template ni evidencias de ejecución.
 - [x] 01-tenants-implementation — Implementar administración administrativa, comercial, contractual y de suscripciones con Core v0.3.0.
 - [x] 02-validation-v010 — Validar PostgreSQL/Core, corregir hallazgos y preparar v0.1.0 para HITL sin publicar.
 - [x] 03-release-contract-adaptation — Adaptar el preflight de release para validar las unidades reales del producto derivado.
+- [ ] 04-tenants-permissions — Aplicar privilegios mínimos y validar acceso RLS en Supabase gi-dev.
 
 ## Fuentes de orientación
 
