@@ -44,3 +44,4 @@ calificación subjetiva.
 - [Adaptación del contrato de release](release-contract-adaptation.md)
 
 <!-- FEATURE_LINKS_END -->
+- [Reconciliación post-merge](post-merge-reconciliation.md)
