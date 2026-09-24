@@ -67,3 +67,8 @@ actualiza el estado documental de forma idempotente.
 La incidencia que originó esta unidad fue la supresión del evento de cierre
 posterior a un merge realizado con `GITHUB_TOKEN`; queda cubierta por el cierre
 explícito del gate y el dispatch de recuperación.
+
+## Detalle
+
+La validación del merge consulta GitHub en vivo y comprueba la relación entre
+PR, rama, scope, commit destino y evidencias antes de escribir `ROADMAP.md`.
