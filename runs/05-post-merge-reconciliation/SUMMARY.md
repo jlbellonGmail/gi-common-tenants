@@ -55,3 +55,9 @@ PR.
 - Invocación desde el gate SingleMaintainer en checkout aislado.
 - Dispatch manual para recuperación de cierres históricos.
 - Regresiones de contrato y documentación operativa.
+
+## Decisiones
+
+Se conserva el gate humano y la política de mínimo privilegio. La reconciliación
+no sustituye autorización ni merge: sólo verifica un merge ya confirmado y
+actualiza el estado documental de forma idempotente.
