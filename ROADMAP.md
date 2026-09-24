@@ -22,6 +22,7 @@ No registres aquí fases históricas del template ni evidencias de ejecución.
 - [x] 03-release-contract-adaptation — Adaptar el preflight de release para validar las unidades reales del producto derivado.
 - [x] 04-tenants-permissions — Aplicar privilegios mínimos y validar acceso RLS en Supabase gi-dev.
 - [x] 05-post-merge-reconciliation — Corregir y reconciliar el cierre post-merge del Template sin depender de eventos suprimidos por GITHUB_TOKEN.
+- [ ] 06-governance-guard-fix — Corregir la detección del guard de develop y verificar el circuito de gobernanza sin alterar el producto.
 
 ## Fuentes de orientación
 

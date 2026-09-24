@@ -83,6 +83,13 @@ def test_guard_workflow_checks_commit_pr_association_against_develop():
     assert 'select(.base.ref == "develop" and .merged_at != null)' in content
 
 
+def test_guard_workflow_passes_fallback_filter_to_jq_not_gh_api():
+    content = _read_guard_workflow()
+    assert 'gh api "repos/${{ github.repository }}/pulls?state=closed&base=develop&per_page=100" |' in content
+    assert 'jq --arg sha "$sha"' in content
+    assert 'pulls?state=closed&base=develop&per_page=100" --jq' not in content
+
+
 def test_guard_workflow_handles_forced_push():
     content = _read_guard_workflow()
     assert "github.event.forced" in content
