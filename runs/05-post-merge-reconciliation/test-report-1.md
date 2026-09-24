@@ -7,5 +7,5 @@ feedback:
   - "PASS: sync-agentic-adapters.ps1 -Check."
   - "PASS: validate-supply-chain.ps1."
   - "PASS: análisis sintáctico PowerShell de reconcile-merged-feature.ps1."
-  - "PENDIENTE: CI remoto debe confirmar los tres jobs sobre el HEAD definitivo."
+  - "PASS: CI remoto confirmó circuit-tests, product-tests y local-reconciler-tests sobre el HEAD autorizado."
 ```
