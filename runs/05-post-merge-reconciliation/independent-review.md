@@ -1,7 +1,7 @@
 status: approved
 attempt: 1
 scope: 05-post-merge-reconciliation
-head: f93d782604e57107b7c48b955856def1b5fa62c0
+head: 476f33384acec00fc1d901f4c78e2297df152278
 base: develop
 feedback:
   - "PASS: la reconciliación valida PR MERGED, base develop, rama esperada y merge commit alcanzable desde develop."
