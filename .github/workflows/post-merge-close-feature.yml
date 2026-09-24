@@ -98,6 +98,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          # La reconciliación trabaja sobre develop fresco; equivale al
+          # antiguo -SkipLocalCleanup del cierre post-merge.
           ./scripts/reconcile-merged-feature.ps1 `
             -Slug '${{ steps.feature.outputs.slug }}' `
             -Branch '${{ steps.feature.outputs.branch }}' `
