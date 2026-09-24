@@ -184,6 +184,40 @@ function Add-PrComment {
     }
 }
 
+function Add-GateEvidenceComment {
+    param(
+        [Parameter(Mandatory = $true)][string] $GitHubCliPath,
+        [Parameter(Mandatory = $true)][string] $PrRef,
+        [Parameter(Mandatory = $true)][int] $PrNumber,
+        [Parameter(Mandatory = $true)][string] $Scope,
+        [Parameter(Mandatory = $true)][string] $Head,
+        [Parameter(Mandatory = $true)][string] $BaseBranch,
+        [Parameter(Mandatory = $true)][string] $AuthorizationSource
+    )
+
+    $body = @(
+        '<!-- GI-SINGLEMAINTAINER-GATE -->',
+        'gate: approved',
+        "pr: $PrNumber",
+        "scope: $Scope",
+        "head: $Head",
+        "base: $BaseBranch",
+        'decision: MERGE',
+        'ci: PASS',
+        'integrity: PASS',
+        'review: PASS',
+        "authorizationSource: $AuthorizationSource"
+    ) -join [Environment]::NewLine
+    $bodyPath = Join-Path ([IO.Path]::GetTempPath()) ("gate-evidence-{0}.md" -f ([guid]::NewGuid()))
+    try {
+        [IO.File]::WriteAllText($bodyPath, $body + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))
+        [void](Invoke-Gh -GitHubCliPath $GitHubCliPath -Arguments @("pr", "comment", $PrRef, "--body-file", $bodyPath))
+    }
+    finally {
+        if (Test-Path -LiteralPath $bodyPath) { Remove-Item -LiteralPath $bodyPath -Force }
+    }
+}
+
 function ConvertTo-ObjectArray {
     param($Value)
 
@@ -475,6 +509,15 @@ if ($checks.Status -ne "passed") {
 }
 
 Write-Host "==> Checks verdes. Mergeando PR '$prRef'..."
+$authorizationSource = if ($preauthorized) { "scoped-human-authorization" } else { "github-review" }
+Add-GateEvidenceComment `
+    -GitHubCliPath $ghPath `
+    -PrRef $prRef `
+    -PrNumber $pr.number `
+    -Scope $Slug `
+    -Head $pr.headRefOid `
+    -BaseBranch $BaseBranch `
+    -AuthorizationSource $authorizationSource
 $mergeFlag = switch ($MergeMethod) {
     "merge" { "--merge" }
     "squash" { "--squash" }
