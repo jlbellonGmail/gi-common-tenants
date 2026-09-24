@@ -1,4 +1,4 @@
-HEAD: 7fe6e17
+HEAD: c2aec88
 status: PASS
 check-integrity: PASS
 sync-agentic-adapters: PASS
