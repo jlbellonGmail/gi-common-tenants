@@ -19,15 +19,15 @@ preparada, pero no se debe crear tag ni publicar release automáticamente.
 
 ## Estado verificado automáticamente
 
-- Actualizado: 2026-09-23T19:48:27Z
+- Actualizado: 2026-09-24T03:49:06Z
 - Versión: unreleased
-- Rama: feature/03-release-contract-adaptation
-- HEAD: 3af63044df4f903b2a5a147b594cbe7bdb87c1d6
+- Rama: feature/04-tenants-permissions
+- HEAD: d3be99d1ed4a39a23b6aedbd2ce8669f4852b27b
 - Remoto: https://github.com/jlbellonGmail/gi-common-tenants.git
 - Working tree: dirty
-- Worktrees: 2
-- Worktrees Git: 2
-- Unidades activas: = [feature/03-release-contract-adaptation]
+- Worktrees: 3
+- Worktrees Git: 3
+- Unidades activas: = [feature/03-release-contract-adaptation]; = [feature/04-tenants-permissions]
 - PR activa: UNKNOWN / sin PR abierta
 - CI: UNKNOWN / sin CI verificable
 - CI vigente: UNKNOWN / sin CI verificable
