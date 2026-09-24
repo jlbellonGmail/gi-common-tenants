@@ -6,6 +6,7 @@ Guías operativas del repositorio.
 - [Reconciliación post-merge](post-merge-reconciliation.md)
 - [Corregir guard-develop y verificar gobernanza](governance-guard-fix.md)
 - [Conservar evidencias HITL compatibles](governance-evidence-preservation.md)
+- [Completar evidencia durable post-merge](post-merge-gate-evidence.md)
 - [Adaptación del contrato de release](release-contract-adaptation.md)
 - [API Common-Tenants](tenants-api.md)
 - [Tests CI y auditoría](tests-ci-audit.md)
