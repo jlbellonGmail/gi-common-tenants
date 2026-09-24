@@ -1,4 +1,4 @@
-HEAD: 476f33384acec00fc1d901f4c78e2297df152278
+HEAD: 6889ea7882a8d63cc12afc1cc7b63dde73c14ef4
 status: PASS
 check-integrity: PASS
 sync-agentic-adapters: PASS
