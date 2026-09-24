@@ -1,7 +1,7 @@
 status: approved
 attempt: 1
 scope: 04-tenants-permissions
-head: 493efff39281ece1e2b69c69aaf7019b46ec9a05
+head: HEAD
 base: develop
 feedback:
   - "PASS: la migración incremental conserva RLS en las 12 tablas y no modifica el esquema core."
