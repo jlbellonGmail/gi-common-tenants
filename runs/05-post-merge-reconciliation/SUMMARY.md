@@ -33,6 +33,11 @@ evidencias; no usa PAT ni force-push. La operación es idempotente y fail-safe.
 Tests de contrato, suite del circuito, tests de producto, sintaxis PowerShell,
 adaptadores agentic, supply chain y diff limpio.
 
+## Validación
+
+La suite local del circuito y de producto se ejecuta antes de solicitar CI;
+las evidencias remotas quedan vinculadas al HEAD definitivo de la PR.
+
 ## Evidencias
 
 `spec.md`, `plan.md`, `tasks.md`, `decision.md`, `audit-1.md`,
