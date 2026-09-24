@@ -72,3 +72,7 @@ explícito del gate y el dispatch de recuperación.
 
 La validación del merge consulta GitHub en vivo y comprueba la relación entre
 PR, rama, scope, commit destino y evidencias antes de escribir `ROADMAP.md`.
+
+Estado: READY_FOR_PR
+PR: pendiente de creación por el script oficial
+Merge: pendiente
