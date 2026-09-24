@@ -75,10 +75,10 @@ try {
     if ($null -eq $gateComment) {
         $authorization = Assert-Evidence $authorizationPath '(?m)^decision:\s*MERGE\s*$' "autorización humana"
         if ($authorization -notmatch "(?m)^scope:\s*$([regex]::Escape($Slug))\s*$") { throw "La autorización no corresponde al scope '$Slug'." }
+        Assert-Evidence (Join-Path $runDir "independent-review.md") '(?m)^status:\s*approved\s*$' "revisión independiente" | Out-Null
+        $integrity = Assert-Evidence (Join-Path $runDir "integrity-evidence.md") '(?im)\bPASS\b' "integridad"
+        if ($integrity -match '(?im)\b(?:FAIL|ERROR|TIMEOUT)\b') { throw "La evidencia de integridad contiene un resultado negativo." }
     }
-    Assert-Evidence (Join-Path $runDir "independent-review.md") '(?m)^status:\s*approved\s*$' "revisión independiente" | Out-Null
-    $integrity = Assert-Evidence (Join-Path $runDir "integrity-evidence.md") '(?im)\bPASS\b' "integridad"
-    if ($integrity -match '(?im)\b(?:FAIL|ERROR|TIMEOUT)\b') { throw "La evidencia de integridad contiene un resultado negativo." }
 
     $requiredJobs = @("circuit-tests", "product-tests", "local-reconciler-tests")
     $checks = @($pr.statusCheckRollup | Where-Object { $_.workflowName -eq "CI" -and $_.name -in $requiredJobs })

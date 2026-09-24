@@ -50,6 +50,13 @@ def test_merge_gate_publishes_evidence_consumable_after_merge():
     assert "authorizationSource" in script
 
 
+def test_gate_comment_covers_review_and_integrity_when_files_are_not_on_develop():
+    script = read("scripts/reconcile-merged-feature.ps1")
+    assert "if ($null -eq $gateComment)" in script
+    assert 'Assert-Evidence (Join-Path $runDir "independent-review.md")' in script
+    assert 'Assert-Evidence (Join-Path $runDir "integrity-evidence.md")' in script
+
+
 def test_manual_post_merge_dispatch_exists_for_recovery():
     workflow = read(".github/workflows/post-merge-close-feature.yml")
     assert "workflow_dispatch:" in workflow
