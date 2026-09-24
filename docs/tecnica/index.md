@@ -16,6 +16,7 @@ para auditar el estado acumulado del repo con checks verificables, no una
 calificación subjetiva.
 
 <!-- FEATURE_LINKS_START -->
+- [Corregir reconciliacion post-merge](post-merge-reconciliation.md)
 
 - [Fuente unica router modelos](fuente-unica-router-modelos.md)
 - [Code Reviewer Y Sdd](code-reviewer-y-sdd.md)
