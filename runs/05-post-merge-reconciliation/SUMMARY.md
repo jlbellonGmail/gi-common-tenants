@@ -76,5 +76,6 @@ PR, rama, scope, commit destino y evidencias antes de escribir `ROADMAP.md`.
 Estado: READY_FOR_PR
 Versión: unreleased
 Tipo: Feature de gobernanza del Template
+SDD: FULL
 PR: pendiente de creación por el script oficial
 Merge: pendiente
