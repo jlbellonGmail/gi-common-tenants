@@ -43,3 +43,10 @@ adaptadores agentic, supply chain y diff limpio.
 La implementación local y las regresiones determinísticas pasan. La validación
 remota de CI y el único gate HITL se ejecutarán sobre el HEAD publicado de la
 PR.
+
+## Cambios principales
+
+- Nuevo reconciliador post-merge con validaciones de PR, merge, evidencias y CI.
+- Invocación desde el gate SingleMaintainer en checkout aislado.
+- Dispatch manual para recuperación de cierres históricos.
+- Regresiones de contrato y documentación operativa.
