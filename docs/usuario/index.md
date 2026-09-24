@@ -8,6 +8,7 @@ Ver también [Circuito agentico](circuito-agentico.md) para operar la
 fuente canónica, regenerar adaptadores y declarar modelos por ejecución.
 
 <!-- FEATURE_LINKS_START -->
+- [Operación de reconciliación post-merge](post-merge-reconciliation.md)
 
 - [Fuente unica router modelos](fuente-unica-router-modelos.md)
 - [Code Reviewer Y Sdd](code-reviewer-y-sdd.md)
@@ -35,4 +36,3 @@ fuente canónica, regenerar adaptadores y declarar modelos por ejecución.
 - [Adaptación del contrato de release](release-contract-adaptation.md)
 
 <!-- FEATURE_LINKS_END -->
-- [Operación de reconciliación post-merge](post-merge-reconciliation.md)
