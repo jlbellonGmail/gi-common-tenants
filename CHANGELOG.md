@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1] - Preparada para HITL
+
+- Privilegios PostgreSQL mínimos para `authenticated` y `service_role`.
+- Sin acceso para `anon`.
+- RLS tenant-scoped y lectura de catálogo activo conservados.
+- Validación real de aislamiento en Supabase gi-dev.
+
 ## [0.1.0] - Preparada para HITL
 
 - Administración administrativa, legal, comercial, contractual y de suscripciones.

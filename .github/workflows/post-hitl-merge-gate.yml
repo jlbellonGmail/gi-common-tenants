@@ -95,3 +95,20 @@ jobs:
             -AuthorizationPath "$runRoot/${{ steps.feature.outputs.slug }}/human-authorization.md" `
             -IndependentReviewPath "$runRoot/${{ steps.feature.outputs.slug }}/independent-review.md" `
             -IntegrityEvidencePath "$runRoot/${{ steps.feature.outputs.slug }}/integrity-evidence.md"
+
+      - name: Reconciliar cierre post-merge sin depender del evento closed
+        if: steps.feature.outputs.skip != 'true'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git fetch origin develop --prune
+          git worktree add --detach "$env:RUNNER_TEMP/reconcile-develop" origin/develop
+          try {
+            Push-Location "$env:RUNNER_TEMP/reconcile-develop"
+            ./scripts/reconcile-merged-feature.ps1 `
+              -Slug '${{ steps.feature.outputs.slug }}' `
+              -Branch '${{ steps.feature.outputs.branch }}' `
+              -PrNumber ${{ github.event.pull_request.number }}
+          }
+          finally { Pop-Location; git worktree remove --force "$env:RUNNER_TEMP/reconcile-develop" }

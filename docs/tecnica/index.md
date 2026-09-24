@@ -16,6 +16,7 @@ para auditar el estado acumulado del repo con checks verificables, no una
 calificación subjetiva.
 
 <!-- FEATURE_LINKS_START -->
+- [Corregir reconciliacion post-merge](post-merge-reconciliation.md)
 
 - [Fuente unica router modelos](fuente-unica-router-modelos.md)
 - [Code Reviewer Y Sdd](code-reviewer-y-sdd.md)
@@ -36,6 +37,7 @@ calificación subjetiva.
 - [MCP y herramientas externas](mcp-herramientas.md)
 - [Routing dinámico por capacidades y evidencia](routing-dinamico.md)
 - [Arquitectura de Common-Tenants](tenants-module.md)
+- [Acceso PostgreSQL de Common-Tenants](tenants-db-access.md)
 - [Releases y evolución](releases-evolucion.md)
 - [Unidades y paralelización](unidades-paralelizacion.md)
 - [Validacion integral v2](validacion-integral-v2.md)

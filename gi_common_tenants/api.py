@@ -23,7 +23,7 @@ def create_app(service, *, authenticate: Callable[[Request], TenantContext | Non
     ``authenticate`` is mandatory. Common-Tenants does not parse bearer tokens
     and never treats client-supplied tenant headers as authentication.
     """
-    app = FastAPI(title="GI Common Tenants API", version="0.1.0", root_path="")
+    app = FastAPI(title="GI Common Tenants API", version="0.1.1", root_path="")
 
     @app.exception_handler(TenantsError)
     async def tenants_error(_: Request, exc: TenantsError):
