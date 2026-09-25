@@ -14,3 +14,5 @@
   la prueba de sincronización de adaptadores después de varias ejecuciones.
   Se conserva como incidencia local y queda exigida/verificada por CI.
 - La release/tag `v0.1.1` no fue modificada.
+- CI de PR #12, run `36078037233`: `circuit-tests`, `product-tests` y
+  `local-reconciler-tests` PASS.
