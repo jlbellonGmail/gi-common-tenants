@@ -1,6 +1,6 @@
 """GI-COMMON-TENANTS public package."""
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 from .authorization import TenantContext
 from .core import CoreApiAdapter, HttpCoreAdapter

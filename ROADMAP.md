@@ -24,6 +24,7 @@ No registres aquí fases históricas del template ni evidencias de ejecución.
 - [x] 05-post-merge-reconciliation — Corregir y reconciliar el cierre post-merge del Template sin depender de eventos suprimidos por GITHUB_TOKEN.
 - [x] 06-governance-guard-fix — Corregir la detección del guard de develop y verificar el circuito de gobernanza sin alterar el producto.
 - [x] 08-post-merge-gate-evidence — Completar la compatibilidad de evidencia del cierre post-merge.
+- [-] 09-package-version-consistency-v011 — Corregir la versión pública del módulo para que el artefacto de Tenants 0.1.1 sea coherente con sus metadatos, verificaciones y documentación.
 
 ## Fuentes de orientación
 
@@ -64,6 +65,7 @@ No registres aquí fases históricas del template ni evidencias de ejecución.
 
 
 - [x] 07-governance-evidence-preservation — Conservar evidencias HITL compatibles entre el gate de merge y el cierre post-merge.
+
 
 
 

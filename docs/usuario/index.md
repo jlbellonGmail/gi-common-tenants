@@ -3,6 +3,9 @@
 Guías operativas del repositorio.
 
 <!-- FEATURE_LINKS_START -->
+- [Package Version Consistency V011](package-version-consistency-v011.md)
+- [Package Version Consistency V011](../tecnica/package-version-consistency-v011.md)
+- [Package Version V011](../tecnica/package-version-v011.md)
 - [Reconciliación post-merge](post-merge-reconciliation.md)
 - [Corregir guard-develop y verificar gobernanza](governance-guard-fix.md)
 - [Conservar evidencias HITL compatibles](governance-evidence-preservation.md)
