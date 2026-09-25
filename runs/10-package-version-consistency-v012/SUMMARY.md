@@ -10,7 +10,7 @@ Merge: no realizado
 Preparar la versión correctiva `0.1.2` con metadata, módulo, wheel,
 documentación y verificaciones coherentes, sin sobrescribir `v0.1.1`.
 
-## Resultado actual
+## Resultado
 
 `pyproject.toml`, `gi_common_tenants.__version__` y el wheel reproducible
 reportan `0.1.2`. La evidencia detallada está en `validation-evidence.md`.
