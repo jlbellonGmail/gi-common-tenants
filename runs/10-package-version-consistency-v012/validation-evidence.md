@@ -12,7 +12,7 @@
   `gi-common-tenants 0.1.1`.
 - La suite completa local quedó detenida en una prueba de sincronización de
   adaptadores; el CI remoto la verificó correctamente.
-- HEAD definitivo de PR #12: `6609ea552e47d6f49a46d3c56913f265a9e16dc9`.
+- HEAD definitivo de PR #12: `HEAD` durante la ejecución final del gate.
 - CI de PR #12, run `36078388932`: `circuit-tests`, `product-tests` y
   `local-reconciler-tests` PASS.
 - `check-integrity.ps1`, `feature-contract`, `sync-agentic-adapters -Check`,
