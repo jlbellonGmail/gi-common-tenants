@@ -1,8 +1,8 @@
-Estado: en preparación
+Estado: READY_FOR_PR
 Versión: 0.1.2
 Tipo: Feature
 SDD: FULL
-PR: pendiente
+PR: pendiente de creación
 Merge: no realizado
 
 ## Objetivo
@@ -17,5 +17,5 @@ reportan `0.1.2`. La evidencia detallada está en `validation-evidence.md`.
 
 ## Pendientes
 
-QA remoto, revisión independiente, integridad, `READY_FOR_PR` y PR contra
-`develop`. No se crea tag ni release desde esta unidad.
+QA remoto de CI y revisión posterior de la PR. No se crea tag ni release
+desde esta unidad.

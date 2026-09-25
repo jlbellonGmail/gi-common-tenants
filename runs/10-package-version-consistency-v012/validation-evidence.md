@@ -10,4 +10,7 @@
   el skip local es PostgreSQL/RLS porque `DATABASE_URL` no está configurada.
 - La primera ejecución con el entorno global fue descartada por detectar la
   instalación histórica `gi-common-tenants 0.1.1`; no se usa como evidencia.
+- La suite completa local `tests` no concluyó en este host: quedó detenida en
+  la prueba de sincronización de adaptadores después de varias ejecuciones.
+  Se conserva como incidencia local y queda exigida/verificada por CI.
 - La release/tag `v0.1.1` no fue modificada.
