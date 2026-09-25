@@ -86,3 +86,10 @@ def test_release_readiness_keeps_audit_and_integrity_gates():
     assert "Falta evidencia de release" in content
     assert "check-integrity.ps1" in content
     assert "CI no verde" in content
+
+
+def test_release_readiness_accepts_a_release_branch_derived_from_develop():
+    content = SCRIPT.read_text(encoding="utf-8")
+    assert 'merge-base", "--is-ancestor", $developSha, $candidateSha' in content
+    assert 'remoteDevelop.Groups["sha"].Value -eq $developSha' in content
+    assert 'candidateSha -eq $developSha' not in content
