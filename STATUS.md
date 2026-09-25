@@ -1,32 +1,31 @@
 # Estado operativo
 
-La unidad `09-package-version-consistency-v011` corrige la discrepancia entre
-el metadato de distribución `0.1.1` y `gi_common_tenants.__version__`. La PR
-#11 está abierta contra `develop`; CI está verde. La release/tag `v0.1.1`
-existente es histórica y contiene el wheel inconsistente, por lo que no se
-sobrescribe. El wheel corregido queda en la evidencia de la unidad. No se
-realiza merge ni una nueva publicación sin decisión humana de release.
+La PR #11 fue fusionada contra `develop` y la unidad 09 quedó cerrada. La
+unidad `10-package-version-consistency-v012` prepara la corrección `0.1.2`:
+metadata, módulo y wheel reproducible ya coinciden. La release/tag `v0.1.1`
+permanece histórica e inmutable. La nueva unidad todavía no tiene PR ni
+autorización de merge.
 
 ## Próximo paso
 
-Revisión humana de la PR #11 y decisión de release/publicación.
+Ejecutar QA, revisión, integridad, `READY_FOR_PR` y crear la PR de v0.1.2.
 
 <!-- STATUS:AUTO:BEGIN -->
 
 ## Estado verificado automáticamente
 
-- Actualizado: 2026-09-25T00:09:38Z
+- Actualizado: 2026-09-25T00:53:14Z
 - Versión: unreleased
-- Rama: develop
-- HEAD: 8c197bf7c3991a7b7022fa33b9300855b0afa638
-- Remoto: https://github.com/jlbellonGmail/gi-common-tenants
+- Rama: feature/10-package-version-consistency-v012
+- HEAD: 248909d5216752a3a5e3fe5e6ff7bb78d68bd97e
+- Remoto: https://github.com/jlbellonGmail/gi-common-tenants.git
 - Working tree: dirty
-- Worktrees: 3
-- Worktrees Git: 3
-- Unidades activas: ninguna
+- Worktrees: 4
+- Worktrees Git: 4
+- Unidades activas: = [feature/03-release-contract-adaptation]; = [feature/09-package-version-consistency-v011]; = [feature/10-package-version-consistency-v012]
 - PR activa: UNKNOWN / sin PR abierta
-- CI:  @ 906497c6bd5372b3da950de3b181feab4b8c2b51
-- CI vigente:  @ 906497c6bd5372b3da950de3b181feab4b8c2b51
-- Última release: v0.1.1
+- CI: UNKNOWN / sin CI verificable
+- CI vigente: UNKNOWN / sin CI verificable
+- Última release: UNKNOWN / no disponible
 
 <!-- STATUS:AUTO:END -->
