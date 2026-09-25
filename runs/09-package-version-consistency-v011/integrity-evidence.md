@@ -1,6 +1,6 @@
 # Evidencia de integridad — 09-package-version-consistency-v011
 
-HEAD verificado: `6e92190f22c587c7f691e9eff8317c090dd36808`
+HEAD verificado: `HEAD` (la rama vigente durante el gate)
 Base verificada: `develop`
 PR: `#11`
 

@@ -1,6 +1,6 @@
 status: approved
 scope: 09-package-version-consistency-v011
-head: 6e92190f22c587c7f691e9eff8317c090dd36808
+head: HEAD
 base: develop
 reviewer: independent-review
 reviewedAt: 2026-09-24T22:10:00Z
