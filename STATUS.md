@@ -1,15 +1,14 @@
 # Estado operativo
 
-La unidad `09-package-version-consistency-v011` corrige la discrepancia entre
-el metadato de distribución `0.1.1` y `gi_common_tenants.__version__`. La PR
-#11 está abierta contra `develop`; CI está verde. La release/tag `v0.1.1`
-existente es histórica y contiene el wheel inconsistente, por lo que no se
-sobrescribe. El wheel corregido queda en la evidencia de la unidad. No se
-realiza merge ni una nueva publicación sin decisión humana de release.
+La PR #11 fue fusionada contra `develop` y la unidad 09 quedó cerrada. La
+unidad `10-package-version-consistency-v012` prepara la corrección `0.1.2`:
+metadata, módulo y wheel reproducible ya coinciden. La release/tag `v0.1.1`
+permanece histórica e inmutable. La nueva unidad todavía no tiene PR ni
+autorización de merge.
 
 ## Próximo paso
 
-Revisión humana de la PR #11 y decisión de release/publicación.
+Ejecutar QA, revisión, integridad, `READY_FOR_PR` y crear la PR de v0.1.2.
 
 <!-- STATUS:AUTO:BEGIN -->
 
