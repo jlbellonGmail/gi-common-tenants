@@ -14,18 +14,18 @@ Ejecutar QA, revisión, integridad, `READY_FOR_PR` y crear la PR de v0.1.2.
 
 ## Estado verificado automáticamente
 
-- Actualizado: 2026-09-25T03:02:47Z
+- Actualizado: 2026-09-25T03:35:36Z
 - Versión: unreleased
-- Rama: maintenance/v0.1.2-T10-status-refresh
-- HEAD: b67128d81d6cad81277320fdb1aeabca3a2b5915
-- Remoto: https://github.com/jlbellonGmail/gi-common-tenants.git
+- Rama: develop
+- HEAD: 75f9980a90b1cbacfc615c8267aabfd94326739a
+- Remoto: https://github.com/jlbellonGmail/gi-common-tenants
 - Working tree: dirty
-- Worktrees: 4
-- Worktrees Git: 4
-- Unidades activas: = [maintenance/v0.1.2-T10-status-refresh]; = [feature/03-release-contract-adaptation]; = [feature/09-package-version-consistency-v011]; = [feature/10-package-version-consistency-v012]
+- Worktrees: 3
+- Worktrees Git: 3
+- Unidades activas: ninguna
 - PR activa: UNKNOWN / sin PR abierta
-- CI: UNKNOWN / sin CI verificable
-- CI vigente: UNKNOWN / sin CI verificable
+- CI:  @ 75f9980a90b1cbacfc615c8267aabfd94326739a
+- CI vigente:  @ 75f9980a90b1cbacfc615c8267aabfd94326739a
 - Última release: v0.1.2
 
 <!-- STATUS:AUTO:END -->
