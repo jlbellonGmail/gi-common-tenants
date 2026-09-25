@@ -114,8 +114,14 @@ def test_post_merge_close_syncs_status_from_trusted_develop():
 
 def test_post_merge_auxiliary_maintenance_skips_roadmap_close_but_syncs_status():
     content = _read_workflow("post-merge-close-feature.yml")
-    assert "steps.maintenance.outputs.close_roadmap == 'true'" in content
-    assert "steps.feature.outputs.skip != 'true' && steps.maintenance.outputs.close_roadmap" not in content.split("Sincronizar STATUS", 1)[-1]
+    checkout = content.split("- name: Checkout trusted develop", 1)[1].split("- name:", 1)[0]
+    close = content.split("- name: Cerrar feature en ROADMAP remoto", 1)[1].split("- name:", 1)[0]
+    status = content.split("- name: Sincronizar STATUS en develop", 1)[1]
+    assert "if: steps.feature.outputs.skip != 'true'" in checkout
+    assert "close_roadmap == 'true'" not in checkout
+    assert "if: steps.feature.outputs.skip != 'true' && steps.maintenance.outputs.close_roadmap == 'true'" in close
+    assert "if: steps.feature.outputs.skip != 'true'" in status
+    assert "close_roadmap == 'true'" not in status
 
 
 def test_all_workflows_mention_agents_md():
