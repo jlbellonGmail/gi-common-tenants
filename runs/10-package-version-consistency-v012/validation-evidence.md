@@ -7,12 +7,14 @@
   módulo `0.1.2`, APIs `TenantContext`, `TenantService`, `TenantsError` y
   `TenantsApi` importadas correctamente.
 - `pytest -q tests_tenants` en entorno virtual limpio: `12 passed, 1 skipped`;
-  el skip local es PostgreSQL/RLS porque `DATABASE_URL` no está configurada.
-- La primera ejecución con el entorno global fue descartada por detectar la
-  instalación histórica `gi-common-tenants 0.1.1`; no se usa como evidencia.
-- La suite completa local `tests` no concluyó en este host: quedó detenida en
-  la prueba de sincronización de adaptadores después de varias ejecuciones.
-  Se conserva como incidencia local y queda exigida/verificada por CI.
-- La release/tag `v0.1.1` no fue modificada.
-- CI de PR #12, run `36078037233`: `circuit-tests`, `product-tests` y
+  el skip local es PostgreSQL/RLS por ausencia de `DATABASE_URL`.
+- La ejecución global fue descartada por detectar la instalación histórica
+  `gi-common-tenants 0.1.1`.
+- La suite completa local quedó detenida en una prueba de sincronización de
+  adaptadores; el CI remoto la verificó correctamente.
+- HEAD definitivo de PR #12: `6609ea552e47d6f49a46d3c56913f265a9e16dc9`.
+- CI de PR #12, run `36078388932`: `circuit-tests`, `product-tests` y
   `local-reconciler-tests` PASS.
+- `check-integrity.ps1`, `feature-contract`, `sync-agentic-adapters -Check`,
+  `validate-supply-chain` y `git diff --check`: PASS.
+- `v0.1.1` no fue modificada ni sobrescrita.

@@ -2,7 +2,7 @@ Estado: READY_FOR_PR
 Versión: 0.1.2
 Tipo: Feature
 SDD: FULL
-PR: pendiente de creación
+PR: #12 abierta contra `develop`
 Merge: no realizado
 
 ## Objetivo
@@ -22,20 +22,20 @@ Se actualizaron metadata, módulo, prueba de coherencia, documentación e
 
 ## Validación
 
-La suite Tenants en entorno virtual limpio pasó `12 passed, 1 skipped`; CI
-debe confirmar la suite completa y PostgreSQL/RLS antes del merge.
+La suite Tenants en entorno virtual limpio pasó `12 passed, 1 skipped`.
+El CI final de la PR #12 pasa los tres jobs obligatorios.
 
 ## Decisiones
 
 La release/tag `v0.1.1` permanece inmutable. No se crea tag ni release desde
-esta unidad.
+esta unidad; la publicación futura requiere decisión humana.
 
 ## Incidencias
 
 La suite completa local quedó detenida en una prueba de sincronización de
-adaptadores en este host; se conserva como incidencia y queda exigida por CI.
+adaptadores en este host; CI remoto sí la verificó correctamente.
 
 ## Detalle
 
-La evidencia completa está en `validation-evidence.md`; la PR se crea contra
-`develop` y no se mergea automáticamente.
+La evidencia completa está en `validation-evidence.md`; la PR #12 queda
+abierta contra `develop` y no se mergea automáticamente.
