@@ -61,7 +61,7 @@ jobs:
           fi
 
       - name: Checkout trusted develop
-        if: steps.feature.outputs.skip != 'true'
+        if: steps.feature.outputs.skip != 'true' && steps.maintenance.outputs.close_roadmap == 'true'
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           ref: develop
@@ -106,7 +106,7 @@ jobs:
             -PrNumber ${{ github.event.pull_request.number || inputs.pr_number }}
 
       - name: Sincronizar STATUS en develop
-        if: steps.feature.outputs.skip != 'true' && steps.maintenance.outputs.scope != 'auxiliary'
+        if: steps.feature.outputs.skip != 'true'
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
