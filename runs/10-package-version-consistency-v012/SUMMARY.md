@@ -13,9 +13,29 @@ documentación y verificaciones coherentes, sin sobrescribir `v0.1.1`.
 ## Resultado
 
 `pyproject.toml`, `gi_common_tenants.__version__` y el wheel reproducible
-reportan `0.1.2`. La evidencia detallada está en `validation-evidence.md`.
+reportan `0.1.2`.
 
-## Pendientes
+## Cambios principales
 
-QA remoto de CI y revisión posterior de la PR. No se crea tag ni release
-desde esta unidad.
+Se actualizaron metadata, módulo, prueba de coherencia, documentación e
+índices. Se conservó un wheel reproducible en la evidencia de la unidad.
+
+## Validación
+
+La suite Tenants en entorno virtual limpio pasó `12 passed, 1 skipped`; CI
+debe confirmar la suite completa y PostgreSQL/RLS antes del merge.
+
+## Decisiones
+
+La release/tag `v0.1.1` permanece inmutable. No se crea tag ni release desde
+esta unidad.
+
+## Incidencias
+
+La suite completa local quedó detenida en una prueba de sincronización de
+adaptadores en este host; se conserva como incidencia y queda exigida por CI.
+
+## Detalle
+
+La evidencia completa está en `validation-evidence.md`; la PR se crea contra
+`develop` y no se mergea automáticamente.
