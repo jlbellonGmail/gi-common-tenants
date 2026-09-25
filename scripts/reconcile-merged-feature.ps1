@@ -28,10 +28,33 @@ function Assert-Evidence([string] $Path, [string] $Pattern, [string] $Name) {
     return $text
 }
 
+function Assert-GateComment([int] $PrNumber, [string] $Scope, [string] $Head, [string] $BaseBranch) {
+    $comments = @(Invoke-GhJson @("api", "repos/:owner/:repo/issues/$PrNumber/comments", "--paginate"))
+    foreach ($comment in $comments) {
+        $body = [string]$comment.body
+        if ($body -notmatch '<!-- GI-SINGLEMAINTAINER-GATE -->') { continue }
+        $required = @(
+            '(?m)^gate:\s*approved\s*$',
+            "(?m)^pr:\s*$PrNumber\s*$",
+            "(?m)^scope:\s*$([regex]::Escape($Scope))\s*$",
+            "(?m)^head:\s*$([regex]::Escape($Head))\s*$",
+            "(?m)^base:\s*$([regex]::Escape($BaseBranch))\s*$",
+            '(?m)^decision:\s*MERGE\s*$',
+            '(?m)^ci:\s*PASS\s*$',
+            '(?m)^integrity:\s*PASS\s*$',
+            '(?m)^review:\s*PASS\s*$'
+        )
+        if (($required | Where-Object { $body -notmatch $_ }).Count -eq 0) {
+            return $body
+        }
+    }
+    return $null
+}
+
 $root = if ($RepositoryRoot) { [IO.Path]::GetFullPath($RepositoryRoot) } else { (Get-Location).Path }
 Push-Location $root
 try {
-    $pr = Invoke-GhJson @("pr", "view", $PrNumber, "--json", "number,state,baseRefName,headRefName,mergeCommit,statusCheckRollup")
+    $pr = Invoke-GhJson @("pr", "view", $PrNumber, "--json", "number,state,baseRefName,headRefName,headRefOid,mergeCommit,statusCheckRollup")
     if ($pr.state -ne "MERGED") { throw "La PR #$PrNumber no está MERGED." }
     if ($pr.baseRefName -ne $BaseBranch) { throw "La PR #$PrNumber apunta a '$($pr.baseRefName)', no a '$BaseBranch'." }
     if ($pr.headRefName -ne $Branch) { throw "La PR #$PrNumber apunta a '$($pr.headRefName)', no a '$Branch'." }
@@ -47,11 +70,15 @@ try {
     $roadmap = Get-Content -LiteralPath $roadmapPath -Raw -Encoding UTF8
     $state = Get-RoadmapState $roadmap $Slug
     $runDir = Join-Path $root (Join-Path "runs" $Slug)
-    $authorization = Assert-Evidence (Join-Path $runDir "human-authorization.md") '(?m)^decision:\s*MERGE\s*$' "autorización humana"
-    if ($authorization -notmatch "(?m)^scope:\s*$([regex]::Escape($Slug))\s*$") { throw "La autorización no corresponde al scope '$Slug'." }
-    Assert-Evidence (Join-Path $runDir "independent-review.md") '(?m)^status:\s*approved\s*$' "revisión independiente" | Out-Null
-    $integrity = Assert-Evidence (Join-Path $runDir "integrity-evidence.md") '(?im)\bPASS\b' "integridad"
-    if ($integrity -match '(?im)\b(?:FAIL|ERROR|TIMEOUT)\b') { throw "La evidencia de integridad contiene un resultado negativo." }
+    $authorizationPath = Join-Path $runDir "human-authorization.md"
+    $gateComment = Assert-GateComment $PrNumber $Slug ([string]$pr.headRefOid) $BaseBranch
+    if ($null -eq $gateComment) {
+        $authorization = Assert-Evidence $authorizationPath '(?m)^decision:\s*MERGE\s*$' "autorización humana"
+        if ($authorization -notmatch "(?m)^scope:\s*$([regex]::Escape($Slug))\s*$") { throw "La autorización no corresponde al scope '$Slug'." }
+        Assert-Evidence (Join-Path $runDir "independent-review.md") '(?m)^status:\s*approved\s*$' "revisión independiente" | Out-Null
+        $integrity = Assert-Evidence (Join-Path $runDir "integrity-evidence.md") '(?im)\bPASS\b' "integridad"
+        if ($integrity -match '(?im)\b(?:FAIL|ERROR|TIMEOUT)\b') { throw "La evidencia de integridad contiene un resultado negativo." }
+    }
 
     $requiredJobs = @("circuit-tests", "product-tests", "local-reconciler-tests")
     $checks = @($pr.statusCheckRollup | Where-Object { $_.workflowName -eq "CI" -and $_.name -in $requiredJobs })

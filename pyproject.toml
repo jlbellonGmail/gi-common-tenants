@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gi-common-tenants"
-version = "0.1.1"
+version = "0.1.2"
 description = "GI administrative, legal, commercial and subscription module"
 requires-python = ">=3.12"
 dependencies = [

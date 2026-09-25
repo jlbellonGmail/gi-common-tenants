@@ -19,6 +19,9 @@ def test_reconciliation_requires_merged_pr_and_expected_base_and_branch():
 def test_reconciliation_requires_human_review_integrity_and_ci():
     script = read("scripts/reconcile-merged-feature.ps1")
     assert "human-authorization.md" in script
+    assert "GI-SINGLEMAINTAINER-GATE" in script
+    assert "issues/$PrNumber/comments" in script
+    assert "headRefOid" in script
     assert "independent-review.md" in script
     assert "integrity-evidence.md" in script
     for job in ("circuit-tests", "product-tests", "local-reconciler-tests"):
@@ -37,6 +40,21 @@ def test_post_hitl_does_not_depend_on_closed_event_for_normal_merge():
     workflow = read(".github/workflows/post-hitl-merge-gate.yml")
     assert "reconcile-merged-feature.ps1" in workflow
     assert "git worktree add --detach" in workflow
+
+
+def test_merge_gate_publishes_evidence_consumable_after_merge():
+    script = read("scripts/complete-approved-pr.ps1")
+    assert "Add-GateEvidenceComment" in script
+    assert "GI-SINGLEMAINTAINER-GATE" in script
+    assert '"pr", "comment"' in script
+    assert "authorizationSource" in script
+
+
+def test_gate_comment_covers_review_and_integrity_when_files_are_not_on_develop():
+    script = read("scripts/reconcile-merged-feature.ps1")
+    assert "if ($null -eq $gateComment)" in script
+    assert 'Assert-Evidence (Join-Path $runDir "independent-review.md")' in script
+    assert 'Assert-Evidence (Join-Path $runDir "integrity-evidence.md")' in script
 
 
 def test_manual_post_merge_dispatch_exists_for_recovery():

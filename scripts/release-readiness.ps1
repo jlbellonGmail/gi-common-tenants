@@ -43,7 +43,8 @@ try {
         Assert-Condition ([string]::IsNullOrWhiteSpace($dirty)) "Working tree dirty: la release exige arbol limpio."
         $candidateSha = Invoke-Git @("rev-parse", "$CandidateBranch^{commit}")
         $developSha = Invoke-Git @("rev-parse", "develop^{commit}")
-        Assert-Condition ($candidateSha -eq $developSha) "La candidata no coincide con el HEAD local de develop."
+        $baseRelation = Invoke-Optional "git" @("merge-base", "--is-ancestor", $developSha, $candidateSha)
+        Assert-Condition ($baseRelation.Code -eq 0) "develop no es ancestro de la candidata; la rama de release no deriva del develop validado."
 
         $run = Resolve-ReleaseAuditPath -RepositoryRoot $root -Version $Version -Policy $policy
         Assert-Condition (Test-Path -LiteralPath $run -PathType Container) "Falta la auditoria de release para ${Version}: $run."
@@ -71,9 +72,12 @@ try {
         $failed = @($latestRuns | Where-Object { $_.status -ne "completed" -or $_.conclusion -ne "success" })
         Assert-Condition ($failed.Count -eq 0) "CI no verde para el commit candidato $candidateSha."
 
-        $remote = Invoke-Git @("ls-remote", "origin", "refs/heads/$TargetBranch", "refs/heads/$CandidateBranch")
+        $remote = Invoke-Git @("ls-remote", "origin", "refs/heads/$TargetBranch", "refs/heads/develop", "refs/heads/$CandidateBranch")
         $remoteMain = [regex]::Match($remote, "(?m)^(?<sha>[0-9a-f]{40})\s+refs/heads/$([regex]::Escape($TargetBranch))$")
+        $remoteDevelop = [regex]::Match($remote, "(?m)^(?<sha>[0-9a-f]{40})\s+refs/heads/develop$")
         $remoteDev = [regex]::Match($remote, "(?m)^(?<sha>[0-9a-f]{40})\s+refs/heads/$([regex]::Escape($CandidateBranch))$")
+        Assert-Condition $remoteDevelop.Success "No existe origin/develop."
+        Assert-Condition ($remoteDevelop.Groups["sha"].Value -eq $developSha) "origin/develop no coincide con el develop local validado."
         Assert-Condition $remoteDev.Success "No existe origin/$CandidateBranch."
         Assert-Condition ($remoteDev.Groups["sha"].Value -eq $candidateSha) "origin/$CandidateBranch no coincide con el commit candidato."
         if ($remoteMain.Success) {
