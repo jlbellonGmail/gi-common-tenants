@@ -112,6 +112,12 @@ def test_post_merge_close_syncs_status_from_trusted_develop():
     assert "git push origin develop" in content
 
 
+def test_post_merge_auxiliary_maintenance_skips_roadmap_close_but_syncs_status():
+    content = _read_workflow("post-merge-close-feature.yml")
+    assert "steps.maintenance.outputs.close_roadmap == 'true'" in content
+    assert "steps.feature.outputs.skip != 'true' && steps.maintenance.outputs.close_roadmap" not in content.split("Sincronizar STATUS", 1)[-1]
+
+
 def test_all_workflows_mention_agents_md():
     """Los workflows clave deben referenciar el circuito agente o documentación.
     
