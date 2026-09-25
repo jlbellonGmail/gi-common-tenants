@@ -15,18 +15,18 @@ Revisión humana de la PR #11 y decisión de release/publicación.
 
 ## Estado verificado automáticamente
 
-- Actualizado: 2026-09-24T21:52:47Z
+- Actualizado: 2026-09-25T00:09:38Z
 - Versión: unreleased
-- Rama: feature/09-package-version-consistency-v011
-- HEAD: b5a86f8c9d81bbeb6a5df226ab7d6e3a0ae6478a
-- Remoto: https://github.com/jlbellonGmail/gi-common-tenants.git
+- Rama: develop
+- HEAD: 8c197bf7c3991a7b7022fa33b9300855b0afa638
+- Remoto: https://github.com/jlbellonGmail/gi-common-tenants
 - Working tree: dirty
 - Worktrees: 3
 - Worktrees Git: 3
-- Unidades activas: = [feature/03-release-contract-adaptation]; = [feature/09-package-version-consistency-v011]
+- Unidades activas: ninguna
 - PR activa: UNKNOWN / sin PR abierta
-- CI: UNKNOWN / sin CI verificable
-- CI vigente: UNKNOWN / sin CI verificable
-- Última release: UNKNOWN / no disponible
+- CI:  @ 906497c6bd5372b3da950de3b181feab4b8c2b51
+- CI vigente:  @ 906497c6bd5372b3da950de3b181feab4b8c2b51
+- Última release: v0.1.1
 
 <!-- STATUS:AUTO:END -->
