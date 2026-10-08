@@ -20,5 +20,6 @@ dev = ["pytest>=8", "httpx>=0.27"]
 include = ["gi_common_tenants*"]
 
 [tool.pytest.ini_options]
+pythonpath = ["."]
 testpaths = ["tests_tenants", "tests"]
 addopts = "-q"
