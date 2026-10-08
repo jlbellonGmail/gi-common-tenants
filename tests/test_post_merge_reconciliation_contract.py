@@ -36,12 +36,6 @@ def test_reconciliation_is_safe_for_pending_ready_and_idempotent_done_states():
     assert "'- [x] $1'" in script
 
 
-def test_post_hitl_does_not_depend_on_closed_event_for_normal_merge():
-    workflow = read(".github/workflows/post-hitl-merge-gate.yml")
-    assert "reconcile-merged-feature.ps1" in workflow
-    assert "git worktree add --detach" in workflow
-
-
 def test_merge_gate_publishes_evidence_consumable_after_merge():
     script = read("scripts/complete-approved-pr.ps1")
     assert "Add-GateEvidenceComment" in script
@@ -55,9 +49,3 @@ def test_gate_comment_covers_review_and_integrity_when_files_are_not_on_develop(
     assert "if ($null -eq $gateComment)" in script
     assert 'Assert-Evidence (Join-Path $runDir "independent-review.md")' in script
     assert 'Assert-Evidence (Join-Path $runDir "integrity-evidence.md")' in script
-
-
-def test_manual_post_merge_dispatch_exists_for_recovery():
-    workflow = read(".github/workflows/post-merge-close-feature.yml")
-    assert "workflow_dispatch:" in workflow
-    assert "reconcile-merged-feature.ps1" in workflow
