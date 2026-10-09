@@ -29,7 +29,7 @@ No registres aquí fases históricas del template ni evidencias de ejecución.
 
 ## Fuentes de orientación
 
-- [CONSTITUTION](CONSTITUTION.md) — principios permanentes.
+- [`core/constitution.md` de AI-Native v3.0.1](https://github.com/jlbellonGmail/ai-native/blob/v3.0.1/core/constitution.md) — principios permanentes (sustituye al `CONSTITUTION.md` de Template, retirado).
 - [AGENTS](AGENTS.md) — operación del circuito.
 - [STATUS](STATUS.md) — estado actual para reentrada.
 
