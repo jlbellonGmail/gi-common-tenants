@@ -11,7 +11,10 @@ from wsgiref.simple_server import make_server
 import pytest
 
 CORE_PATH = Path(
-    os.environ.get("GI_PLATFORM_CORE_PATH", r"C:\Proyectos\gi-platform-core")
+    os.environ.get(
+        "GI_PLATFORM_CORE_PATH",
+        Path(__file__).resolve().parents[2] / "gi-platform-core",
+    )
 )
 if not CORE_PATH.exists():
     pytest.skip(

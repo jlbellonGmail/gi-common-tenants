@@ -238,9 +238,9 @@ impide aprobarla.
 
 `develop` es la integración diaria; cada Feature/Milestone usa rama y
 worktree propios. Nunca commitear directamente a `develop` ni `main` desde
-un agente. `guard-develop-branch.yml` es una mitigación reactiva cuando la
-protección nativa de GitHub no está disponible; no se debe tratar como
-protección preventiva. Los cambios de backlog y los cierres automáticos tienen
+un agente. `develop` está protegida por el ruleset `protect-develop-m6` (sin
+push directo); el workflow reactivo `guard-develop-branch.yml` se retiró en M7.
+Los cambios de backlog y los cierres automáticos tienen
 la excepción documentada por la auditoría, y deben conservar evidencia.
 
 `main` es estable y recibe releases desde `develop` por PR. Una release es un

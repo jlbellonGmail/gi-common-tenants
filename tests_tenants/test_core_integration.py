@@ -1,9 +1,12 @@
+import os
 import sys
 from pathlib import Path
 
 import pytest
 
-CORE_PATH = Path(r"C:\Proyectos\gi-platform-core")
+CORE_PATH = Path(
+    os.environ.get("GI_PLATFORM_CORE_PATH", Path(__file__).resolve().parents[2] / "gi-platform-core")
+)
 if not CORE_PATH.exists():
     pytest.skip("GI-PLATFORM-CORE checkout not available in this runner", allow_module_level=True)
 sys.path.insert(0, str(CORE_PATH))
